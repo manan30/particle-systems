@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+// import Icon from './svg/ic_code.svg';
+import Scene from './views/Scene';
+import Controls from './components/Controls';
+
+import { Canvas, CodeFAB } from './GlobalStyles';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Canvas>
+        <Scene />
+        <Controls />
+      </Canvas>
+      {/* <a
+        href='https://github.com/manan30/keyframing'
+        target='_blank'
+        rel='noopener noreferrer'>
+        <CodeFAB src={Icon} />
+      </a> */}
+    </>
   );
 }
 
