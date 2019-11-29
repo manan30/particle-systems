@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useLoader } from 'react-three-fiber';
+import { useLoader, useFrame } from 'react-three-fiber';
 import { TextureLoader } from 'three';
 
 import CometTextureURL from '../textures/texture.jpg';
@@ -11,13 +11,19 @@ function Asset({ url }) {
   return loadTexture;
 }
 
-function Comet({ setRef }) {
+function Comet() {
+  const cometRef = React.useRef();
   const cometTexture = Asset({ url: CometTextureURL });
   const CometRoughnessTexture = Asset({ url: CometRoughnessTextureURL });
 
+  // useFrame((_, delta) => {
+  //   cometRef.current.position.x += delta;
+  //   cometRef.current.position.y += delta;
+  // });
+
   return (
-    <mesh ref={setRef}>
-      <sphereBufferGeometry attach='geometry' args={[2, 360, 360]} />
+    <mesh ref={cometRef}>
+      <sphereBufferGeometry attach='geometry' args={[0.2, 360, 360]} />
       <meshStandardMaterial
         attach='material'
         map={cometTexture}
@@ -28,11 +34,11 @@ function Comet({ setRef }) {
   );
 }
 
-Comet.propTypes = {
-  setRef: PropTypes.objectOf(PropTypes.any)
-};
+// Comet.propTypes = {
+//   setRef: PropTypes.objectOf(PropTypes.any)
+// };
 
-Comet.defaultProps = {
-  setRef: {}
-};
+// Comet.defaultProps = {
+//   setRef: {}
+// };
 export default Comet;
