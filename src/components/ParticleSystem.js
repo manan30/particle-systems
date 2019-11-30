@@ -65,24 +65,23 @@ function Particles({ setRef }) {
     particles.push(particleMesh);
   };
 
-  generateParticle(1000);
-
   useFrame(() => {
     if (particles.length <= 10000) generateParticle();
 
     particles.forEach(particle => {
       particle.material.opacity -= 0.008;
 
+      particle.position.x += 0.002 + (randomRange(-0.01, 0.08) / 1) * 0.8;
+      particle.position.y += 0.002 + (randomRange(-0.01, 0.08) / 1) * 0.8;
+
       if (particle.material.opacity <= 0) {
         particle.position.x = 0;
         particle.position.y = 0;
         particle.material.opacity = 1;
       }
-
-      particle.position.x += 0.002 + (randomRange(-0.01, 0.08) / 1) * 0.8;
-      particle.position.y += 0.002 + (randomRange(-0.01, 0.08) / 1) * 0.8;
     });
   });
+
   // const particleGeometry = new SphereBufferGeometry(0.01);
   // const particleMaterial = new MeshLambertMaterial({
   //   color: 'red',

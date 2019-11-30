@@ -1,40 +1,40 @@
 import React, { useRef } from 'react';
 import { useThree, useFrame } from 'react-three-fiber';
 
-import { Vector3 } from 'three';
 import Comet from '../components/Comet';
-import Particles from '../components/ParticleSystem';
 
 function Scene() {
-  const cometRef = useRef();
-  const particlesRef = useRef();
+  const objectRef = useRef();
+  const outerRef = useRef();
   const { camera, scene } = useThree();
 
-  camera.fov = 45;
+  camera.fov = 60;
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.near = 0.1;
-  camera.far = 1000;
+  camera.far = 10000;
 
-  camera.position.z = 5;
-
-  React.useEffect(() => console.log(particlesRef.current.parent));
+  camera.position.y = 10;
+  camera.position.z = 200;
 
   useFrame((_, delta) => {
-    if (particlesRef.current) {
-      particlesRef.current.parent.position.x += delta * 100;
-      particlesRef.current.parent.position.y += delta * 100;
-    }
+    if (outerRef.current) outerRef.current.rotation.y += delta / 100;
+    if (objectRef.current) objectRef.current.rotation.y += delta / 4;
   });
 
   return (
     <>
       <ambientLight color={0xffffff} intensity={1} />
-      <group>
-        <React.Suspense fallback={<mesh />}>
-          <Comet />
-        </React.Suspense>
-        <Particles setRef={particlesRef} />
-      </group>
+      <object3D>
+        <mesh ref={outerRef} position={[0, 0, 0]}>
+          <sphereBufferGeometry attach='geometry' args={[10, 32, 32]} />
+          {/* <meshLambertMaterial attach='material' color={0xffff00} /> */}
+        </mesh>
+        <object3D ref={objectRef}>
+          <React.Suspense fallback={<mesh />}>
+            <Comet />
+          </React.Suspense>
+        </object3D>
+      </object3D>
     </>
   );
 }
