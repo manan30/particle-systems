@@ -1,6 +1,7 @@
 import React from 'react';
 
 // import Icon from './svg/ic_code.svg';
+
 import Scene from './views/Scene';
 import Controls from './components/Controls';
 

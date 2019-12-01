@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useThree, useFrame } from 'react-three-fiber';
 
 import Comet from '../components/Comet';
@@ -6,7 +7,7 @@ import Comet from '../components/Comet';
 function Scene() {
   const objectRef = useRef();
   const outerRef = useRef();
-  const { camera, scene } = useThree();
+  const { camera } = useThree();
 
   camera.fov = 60;
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -14,7 +15,7 @@ function Scene() {
   camera.far = 10000;
 
   camera.position.y = 10;
-  camera.position.z = 200;
+  camera.position.z = 150;
 
   useFrame((_, delta) => {
     if (outerRef.current) outerRef.current.rotation.y += delta / 100;
@@ -27,7 +28,7 @@ function Scene() {
       <object3D>
         <mesh ref={outerRef} position={[0, 0, 0]}>
           <sphereBufferGeometry attach='geometry' args={[10, 32, 32]} />
-          {/* <meshLambertMaterial attach='material' color={0xffff00} /> */}
+          <meshLambertMaterial attach='material' color={0xffff00} />
         </mesh>
         <object3D ref={objectRef}>
           <React.Suspense fallback={<mesh />}>
