@@ -2,7 +2,7 @@
   "name": "particle-systems",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mananjoshi.me/projects/particle-system/", 
+  "homepage": "https://mananjoshi.me/projects/particle-system/",
   "dependencies": {
     "prop-types": "15.7.2",
     "react": "^16.12.0",
